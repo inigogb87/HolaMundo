@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project name="HolaMundo" default="package">
+	
+	<!-- declarar variables -->
+		<property name="dir.classes" value="bin"/>
+		<property name="dir.documentacion" value="doc"/>
+		<property name="dir.distribucion" value="dist"/>
+		<property name="source.java" value="src/java"/>
+		<property name="source.test" value="src/test"/>
+	<!-- FIN: declarar variables -->
+
+	<!-- Tarea para eliminar la carpeta de binarios-->
+	<target name="clean">
+		<echo>Comenzando ${ant.project.name}</echo>
+		<echo>-------------------------------------</echo>
+		<delete dir="${dir.classes}"/>
+		<delete dir="${dir.documentacion}"/>
+		<delete dir="${dir.distribucion}"/>	
+	</target>	
+	
+	<target name="compile" depends="clean">
+		 <mkdir dir="${dir.classes}"/>
+		 <javac srcdir="${source.java}" destdir="${dir.classes}"/>
+	</target>
+	
+	<target name="javadoc" depends="compile">
+		<mkdir dir="${dir.documentacion}"/>
+		<javadoc packagenames="com.*"
+		           sourcepath="${source.java}"		           
+		           defaultexcludes="yes"
+		           destdir="doc"
+		           author="true"
+		           version="true"
+		           use="true"
+		           windowtitle="API Documentacion">
+		</javadoc>	
+	</target>
+	
+	<!-- genera el .jar para distribuirlo -->
+	<target name="package" depends="javadoc">
+		<mkdir dir="${dir.distribucion}"/>
+		<jar destfile="dist/${ant.project.name}.jar">
+		            <fileset dir="${dir.classes}" includes="**/*.class"/>
+					<fileset dir="${source.java}" includes="**/*.java"/>
+		            <manifest>
+		                <attribute name="Main-Class" value="${ant.project.name}"/>
+		            </manifest>
+		 </jar>
+	</target>
+		
+		
+
+</project>
