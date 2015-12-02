@@ -140,7 +140,7 @@ public static final char SEXO_INDEFINIDO  ='I';
 		 * @return si>18, false en caso contrario
 		 */
 		public boolean isMayorEdad(){
-			boolean resul
+			
 		return false;	
 		}
 		
