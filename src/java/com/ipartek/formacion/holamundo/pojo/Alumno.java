@@ -1,4 +1,7 @@
 package com.ipartek.formacion.holamundo.pojo;
+import java.util.*;
+import com.sun.java_cup.internal.runtime.Scanner;
+
 /**
  * 
  * Clase instanciable de tipo POJO o BEAN para representar a un <code>Alumno</code>de un curso
@@ -140,7 +143,14 @@ public static final char SEXO_INDEFINIDO  ='I';
 		 * @return si>18, false en caso contrario
 		 */
 		public boolean isMayorEdad(){
-			
+			boolean e =false;
+		    
+		       if (edad < 18){
+		           System.out.println("Eres menor de edad");
+		        }
+		        else {
+		            System.out.println("Eres mayor de edad");
+		        }
 		return false;	
 		}
 		
