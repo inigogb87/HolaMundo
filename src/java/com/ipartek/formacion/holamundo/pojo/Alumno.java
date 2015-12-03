@@ -13,6 +13,9 @@ public class Alumno {
 public static final String NOMBRE_ANONIMO  ="Anonimo" ;
 public static final String NOMBRE_SIN_DEFINIR  ="Anonimo" ;
 
+public static final int EDAD_INICIAL=0;
+public static final int EDAD_MINIMA=18;
+
 public static final char SEXO_HOMBRE  ='H';
 public static final char SEXO_MUJER  ='M';
 public static final char SEXO_INDEFINIDO  ='I';
@@ -67,21 +70,20 @@ public static final char SEXO_INDEFINIDO  ='I';
 	 * <li><code>nombre</code> NOMBRE_ANONIMO</li>
 	 * <li><code>apellidos</code> </li>
 	 * <li><code>becado</code> NOMBRE_ANONIMO</li>
-	 * <li><code>edad</code> NOMBRE_ANONIMO</li>
-	 * <li><code>sexo</code> NOMBRE_ANONIMO</li>
+	 * <li><code>edad</code> </li>
+	 * <li><code>sexo</code> </li>
 	 */
 		public Alumno() {
 			super();
 			this.nombre = NOMBRE_ANONIMO;
 			this.apellidos="";	
-			this.becado=false;
-			this.edad=0;
 			this.sexo=SEXO_INDEFINIDO;
+			this.becado=false;
 		}
 
 		public Alumno(String nombre) {
-			super();
-			this.nombre = nombre;
+			this();
+			setNombre(nombre);
 		}
 		
 		//getters y setters
@@ -95,8 +97,20 @@ public static final char SEXO_INDEFINIDO  ='I';
 		 */
 
 		public void setNombre(String nombre) {
-			
-			this.nombre = nombre;
+			if(nombre==null || "".equals(nombre)){
+				this.nombre=NOMBRE_SIN_DEFINIR;
+			}else{
+			//primera inicial mayusculas
+				
+				//1.convertir en array de caracteres
+				char[]  caracteres= nombre.toCharArray();
+				
+				//2.convertir el primer caracter
+				caracteres[0] = Character.toUpperCase(caracteres[0]);
+				
+				//3.Volver a convertir a string el array de caracteres
+				this.nombre = String.valueOf(caracteres);
+			}
 		}
 
 		public String getApellidos() {
@@ -143,18 +157,17 @@ public static final char SEXO_INDEFINIDO  ='I';
 		 * @return si>18, false en caso contrario
 		 */
 		public boolean isMayorEdad(){
-			boolean e =false;
-		    
-		       if (edad < 18){
-		           System.out.println("Eres menor de edad");
-		        }
-		        else {
-		            System.out.println("Eres mayor de edad");
-		        }
-		return false;	
+			boolean resul =false;
+		    if (this.edad >=EDAD_MINIMA){
+		    	   resul=true;
+		       }
+		return resul;	
 		}
 		
+		
 }
+	
+
 		
 		
 		
