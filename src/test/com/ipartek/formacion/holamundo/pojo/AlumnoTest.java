@@ -12,27 +12,64 @@ public class AlumnoTest {
 	public void constructorVacio() {
 		
 	
-	Alumno a = new Alumno();
-	assertTrue("no coincide nombre",Alumno.NOMBRE_ANONIMO.equals(a.getNombre() ) );
-	//assertTrue(a.getApellidos());
-	assertFalse(a.isBecado());
-	assertTrue(a.getEdad()==0);
-	assertTrue(a.getSexo()==Alumno.SEXO_INDEFINIDO);
-	
+		Alumno a = new Alumno();		
+				assertTrue ("No coincide nombre", Alumno.NOMBRE_ANONIMO.equals( a.getNombre() ) ); 
+				assertEquals ("No coincide nombre", Alumno.NOMBRE_ANONIMO,  a.getNombre()  ); 
+				assertEquals ("Apellido deberia ser vacio", "" ,  a.getApellidos()  );
+				assertFalse ( "No deberia ser becado",a.isBecado() );
+				assertEquals ("No es la edad correcta", Alumno.EDAD_INICIAL ,  a.getEdad()  );
+				assertEquals ("No el sexo correcto", Alumno.SEXO_INDEFINIDO, a.getSexo() );
 	}
-	@Ignore
-	public void testAlumnoString() {
-		fail("Not yet implemented");
+	@Test
+	public void ConstructorConParametros() {
+		
+		
+		Alumno a = new Alumno("manolo");	
+				assertEquals ("No coincide nombre", "Manolo",  a.getNombre()  ); //get para strings
+				assertEquals ("Apellido deberia ser vacio", "" ,  a.getApellidos()  );
+				assertFalse ( "No deberia ser becado",a.isBecado() );//is para booleanos
+				assertEquals ("No es la edad correcta", Alumno.EDAD_INICIAL ,  a.getEdad()  );
+				assertEquals ("No el sexo correcto", Alumno.SEXO_INDEFINIDO, a.getSexo() );
+		 		
+				a = new Alumno(null);	
+				assertEquals ("No coincide nombre", Alumno.NOMBRE_SIN_DEFINIR ,  a.getNombre()  ); 
+				
+				a = new Alumno("");	
+				assertEquals ("No coincide nombre", Alumno.NOMBRE_SIN_DEFINIR ,  a.getNombre()  );
+		 		
+		
 	}
 
 	@Test
 	public void testSetNombre() {
-		fail("Not yet implemented");
+		Alumno a = new Alumno();
+		a.setNombre("manolito");
+		assertEquals("no coincide nombre", "Manolito", a.getNombre() );
+		
+		a.setNombre(null);
+		assertEquals("no coincide nombre",Alumno.NOMBRE_SIN_DEFINIR , a.getNombre() );
+		
+		a.setNombre("");
+		assertEquals("no coincide nombre", Alumno.NOMBRE_SIN_DEFINIR , a.getNombre() );
+		
 	}
 
-	@Ignore
+	@Test
 	public void testIsMayorEdad() {
-		fail("Not yet implemented");
+		Alumno a = new Alumno();
+		
+		a.setEdad(-7);
+		assertFalse (a.isMayorEdad());
+		
+		a.setEdad(7);
+		assertFalse (a.isMayorEdad());
+		
+		a.setEdad(18);
+		assertTrue (a.isMayorEdad());
+		
+		a.setEdad(22);
+		assertTrue (a.isMayorEdad());
+		
 	}
 
 }
